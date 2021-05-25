@@ -1,4 +1,5 @@
 package com.codecool.jira.KDT_and_POM_Jira_tests.KDT.testCases;
 
-public class CreateIssueTest {
+public class CreateIssueTest extends TestBase{
+    
 }
