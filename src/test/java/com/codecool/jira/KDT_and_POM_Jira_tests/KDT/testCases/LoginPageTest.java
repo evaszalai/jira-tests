@@ -4,12 +4,11 @@ import com.codecool.jira.KDT_and_POM_Jira_tests.KDT.operation.ReadObject;
 import com.codecool.jira.KDT_and_POM_Jira_tests.KDT.operation.UIOperation;
 import org.junit.jupiter.api.*;
 
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class LoginLogoutTest {
+public class LoginPageTest {
     private static String username;
     private static String password;
     private static ReadObject object;
@@ -35,46 +34,34 @@ public class LoginLogoutTest {
 
     @BeforeEach
     public void goToURL() {
-        operation.goToUrl(allObjects, "url");
-    }
-
-    @Test
-    public void emptyCredentials() throws Exception {
-       operation.click(allObjects, "loginbutton", "id");
-       Assertions.assertEquals("Sorry, your username and password are incorrect - please try again.", operation.getText(allObjects, "wrongLoginMessage", "xpath"));
+        operation.goToUrl(allObjects, "loginPageURL");
     }
 
     @Test
     public void invalidPassword() throws Exception {
         operation.setText(allObjects, "username", "id", username);
         operation.setText(allObjects, "password", "id", "invalid");
-        operation.click(allObjects, "loginbutton", "id");
-        Assertions.assertEquals("Sorry, your username and password are incorrect - please try again.", operation.getText(allObjects, "wrongLoginMessage", "xpath"));
+        operation.click(allObjects, "loginFormSubmit", "id");
+        Assertions.assertEquals("Sorry, your username and password are incorrect - please try again.", operation.getText(allObjects, "loginPageMessage", "xpath"));
         operation.setText(allObjects, "username", "id", username);
         operation.setText(allObjects, "password", "id", password);
-        operation.click(allObjects, "loginbutton", "id");
+        operation.click(allObjects, "loginFormSubmit", "id");
         operation.click(allObjects, "profilePicture", "xpath");
         operation.click(allObjects, "viewProfile", "id");
         Assertions.assertEquals(username, operation.getText(allObjects, "name", "id"));
-    }
-
-    @Test
-    public void notRegisteredUser() throws Exception {
-        operation.setText(allObjects, "username", "id", "invalid");
-        operation.setText(allObjects, "password", "id", "invalid");
-        operation.click(allObjects, "loginbutton", "id");
-        Assertions.assertEquals("Sorry, your username and password are incorrect - please try again.", operation.getText(allObjects, "wrongLoginMessage", "xpath"));
+        operation.click(allObjects, "profile", "xpath");
+        operation.click(allObjects, "logout", "id");
     }
 
     @Test
     public void successfulLoginAndLogout() throws Exception{
         operation.setText(allObjects, "username", "id", username);
         operation.setText(allObjects, "password", "id", password);
-        operation.click(allObjects, "loginbutton", "id");
+        operation.click(allObjects, "loginFormSubmit", "id");
         operation.click(allObjects, "profilePicture", "xpath");
         operation.click(allObjects, "viewProfile", "id");
         Assertions.assertEquals(username, operation.getText(allObjects, "name", "id"));
         operation.click(allObjects, "profile", "xpath");
-        operation.click(allObjects, "logoutButton", "id");
+        operation.click(allObjects, "logout", "id");
     }
 }

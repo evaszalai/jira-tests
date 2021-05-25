@@ -2,15 +2,32 @@ package com.codecool.jira.KDT_and_POM_Jira_tests.KDT.operation;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class UIOperation {
     WebDriver driver;
 
-    public UIOperation(WebDriver driver){
-        this.driver = driver;
+    public UIOperation(){
+        Properties browserProps = new Properties();
+        try {
+            String browserConfigPath = "settings.properties";
+            browserProps.load(new FileInputStream(browserConfigPath));
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        }
+        String webdriverPath = browserProps.getProperty("webdriver");
+        System.setProperty("webdriver.gecko.driver", webdriverPath);
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.setCapability("marionette", true);
+        driver = new FirefoxDriver(firefoxOptions);
+
     }
 
     public void click(Properties p, String objectName, String objectType) throws Exception {
