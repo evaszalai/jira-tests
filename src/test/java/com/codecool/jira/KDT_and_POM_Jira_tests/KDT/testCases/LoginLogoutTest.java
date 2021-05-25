@@ -2,9 +2,7 @@ package com.codecool.jira.KDT_and_POM_Jira_tests.KDT.testCases;
 
 import com.codecool.jira.KDT_and_POM_Jira_tests.KDT.operation.ReadObject;
 import com.codecool.jira.KDT_and_POM_Jira_tests.KDT.operation.UIOperation;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
@@ -42,12 +40,51 @@ public class LoginLogoutTest {
         operation = new UIOperation(driver);
     }
 
+    @BeforeEach
+    public void goToURL() {
+        operation.goToUrl(allObjects, "url");
+    }
+
     @Test
     public void emptyCredentials() throws Exception {
-        operation.goToUrl(allObjects, "url");
+       operation.click(allObjects, "loginbutton", "id");
+       Assertions.assertEquals("Sorry, your username and password are incorrect - please try again.", operation.getText(allObjects, "wrongLoginMessage", "xpath"));
+    }
+
+    @Test
+    public void invalidPassword() throws Exception {
+        operation.setText(allObjects, "username", "id", username);
+        operation.setText(allObjects, "password", "id", "invalid");
+        operation.click(allObjects, "loginbutton", "id");
+        Assertions.assertEquals("Sorry, your username and password are incorrect - please try again.", operation.getText(allObjects, "wrongLoginMessage", "xpath"));
+        operation.setText(allObjects, "username", "id", username);
+        operation.setText(allObjects, "password", "id", password);
+        operation.click(allObjects, "loginbutton", "id");
+        operation.click(allObjects, "profilePicture", "xpath");
+        operation.click(allObjects, "viewProfile", "id");
+        Assertions.assertEquals(username, operation.getText(allObjects, "name", "id"));
+    }
+
+    @Test
+    public void notRegisteredUser() throws Exception {
         operation.setText(allObjects, "username", "id", "invalid");
         operation.setText(allObjects, "password", "id", "invalid");
         operation.click(allObjects, "loginbutton", "id");
         Assertions.assertEquals("Sorry, your username and password are incorrect - please try again.", operation.getText(allObjects, "wrongLoginMessage", "xpath"));
+    }
+
+    @Test
+    public void successfulLogin() throws Exception{
+        operation.setText(allObjects, "username", "id", username);
+        operation.setText(allObjects, "password", "id", password);
+        operation.click(allObjects, "loginbutton", "id");
+        operation.click(allObjects, "profilePicture", "xpath");
+        operation.click(allObjects, "viewProfile", "id");
+        Assertions.assertEquals(username, operation.getText(allObjects, "name", "id"));
+    }
+
+    @AfterEach
+    public void close() {
+        driver.quit();
     }
 }
