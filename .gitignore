@@ -11,6 +11,7 @@
 /idea
 .target
 /target
+KDT-and-POM-Jira-tests.iml
 .iml
 /.iml
 allure-results
