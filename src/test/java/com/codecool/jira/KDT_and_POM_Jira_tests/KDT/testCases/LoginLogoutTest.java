@@ -15,8 +15,6 @@ import java.util.Properties;
 public class LoginLogoutTest {
     private static String username;
     private static String password;
-    private static ReadObject object;
-    private static Properties allObjects;
     private static UIOperation operation;
 
 
@@ -25,17 +23,15 @@ public class LoginLogoutTest {
         Properties browserProps = new Properties();
         username = browserProps.getProperty("username");
         password = browserProps.getProperty("password");
-        object = new ReadObject();
-        allObjects = object.getObjectRepository();
         operation = new UIOperation();
     }
 
     @Test
     public void emptyCredentials() throws Exception {
-        operation.goToUrl(allObjects, "url");
-        operation.setText(allObjects, "username", "id", "invalid");
-        operation.setText(allObjects, "password", "id", "invalid");
-        operation.click(allObjects, "loginbutton", "id");
-        Assertions.assertEquals("Sorry, your username and password are incorrect - please try again.", operation.getText(allObjects, "wrongLoginMessage", "xpath"));
+        operation.goToUrl("url");
+        operation.setText("username", "id", "invalid");
+        operation.setText("password", "id", "invalid");
+        operation.click("loginbutton", "id");
+        Assertions.assertEquals("Sorry, your username and password are incorrect - please try again.", operation.getText("wrongLoginMessage", "xpath"));
     }
 }
