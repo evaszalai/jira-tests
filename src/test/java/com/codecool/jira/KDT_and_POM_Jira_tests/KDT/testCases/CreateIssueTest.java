@@ -49,10 +49,6 @@ public class CreateIssueTest extends TestBase{
 
     @Test
     public void createStoryInCOALA() throws Exception {
-        String project = "COALA project (COALA)";
-        String issueType = "Story";
-        operation.openCreateIssueScreen(project, issueType, "Coala story");
-        operation.checkProjectField(project);
-        operation.checkIssueType(issueType);
+        operation.createIssueInProject("COALA project (COALA)", "Story", "COALA Story");
     }
 }

@@ -83,9 +83,14 @@ public class UIOperation {
         Assertions.assertEquals(project, getAttribute("value", "projectField", "id"));
     }
 
-
     public void checkIssueType(String issueType) throws Exception {
         Assertions.assertEquals(issueType, getAttribute("value", "issueType", "id"));
+    }
+
+    public void createIssueInProject(String project, String issueType, String summary) throws Exception {
+        openCreateIssueScreen(project, issueType, summary);
+        checkProjectField(project);
+        checkIssueType(issueType);
     }
 
     public void openCreateIssueScreen(String project, String issueType, String summary) throws Exception {
