@@ -22,10 +22,18 @@ public class CreateIssueTest extends TestBase{
         String issueType = "Bug";
         String summary = "Test create issue";
         operation.openCreateIssueScreen(project, issueType, summary);
-        operation.click("createIssueSubmit", "id");
+        operation.clickCreateIssueSubmit();
         operation.click("createdIssueNotification", "xpath");
         Assertions.assertEquals(summary, operation.getText("summaryValue", "id"));
         Assertions.assertEquals(issueType, operation.getText("issueTypeValue", "id"));
         Assertions.assertEquals("Main Testing Project", operation.getText("projectNameValue", "id"));
+    }
+
+    @Test
+    public void createIssueWithoutSummary() throws Exception {
+        String errorMessage = "You must specify a summary of the issue.";
+        operation.openCreateIssueScreen("Main Testing Project (MTP)", "Story", "" );
+        operation.clickCreateIssueSubmit();
+        Assertions.assertEquals(errorMessage, operation.getText("errorMessage", "css"));
     }
 }

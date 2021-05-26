@@ -61,6 +61,10 @@ public class UIOperation {
         return waitTime((this.getObject(allObjects,objectName,objectType))).getText();
     }
 
+    public void clickCreateIssueSubmit() throws Exception {
+        click("createIssueSubmit", "id");
+    }
+
     public void openCreateIssueScreen(String project, String issueType, String summary) throws Exception {
         click( "createButton", "id");
         click("projectField", "id");
