@@ -50,7 +50,7 @@ public class LoginPageTest {
         operation.click(allObjects, "viewProfile", "id");
         Assertions.assertEquals(username, operation.getText(allObjects, "name", "id"));
         operation.click(allObjects, "profile", "xpath");
-        operation.click(allObjects, "logout", "id");
+        operation.click(allObjects, "logoutButton", "id");
     }
 
     @Test
@@ -62,6 +62,6 @@ public class LoginPageTest {
         operation.click(allObjects, "viewProfile", "id");
         Assertions.assertEquals(username, operation.getText(allObjects, "name", "id"));
         operation.click(allObjects, "profile", "xpath");
-        operation.click(allObjects, "logout", "id");
+        operation.click(allObjects, "logoutButton", "id");
     }
 }
