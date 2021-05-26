@@ -5,9 +5,13 @@ import org.junit.jupiter.api.*;
 
 public class CreateIssueTest extends TestBase{
 
+    @BeforeAll
+    public static void start(){
+        setup();
+    }
+
     @BeforeEach
     public void login() throws Exception {
-        setup();
         launchBrowser();
         operation.goToUrl("url");
         operation.setText("username", "id", username);
