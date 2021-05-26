@@ -61,6 +61,14 @@ public class UIOperation {
         return waitTime((this.getObject(allObjects,objectName,objectType))).getText();
     }
 
+    public void clear(String objectName, String objectType) throws Exception {
+        waitTime((this.getObject(allObjects,objectName,objectType))).clear();
+    }
+
+    public void acceptAlert() {
+        driver.switchTo().alert().accept();
+    }
+
 
     /**
      * Find element BY using object type and value
