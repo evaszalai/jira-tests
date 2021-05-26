@@ -36,7 +36,6 @@ public class LoginPageTest {
     public void goToURL() {
         operation = new UIOperation();
         operation.goToUrl(allObjects, "loginPageURL");
-        UIOperation.waitTime();
     }
 
     @Test
