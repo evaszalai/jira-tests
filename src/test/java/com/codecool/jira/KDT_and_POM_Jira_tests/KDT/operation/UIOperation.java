@@ -11,12 +11,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 public class UIOperation {
     private static WebDriver driver;
+    private static Properties allObjects;
 
-    public UIOperation(){
+    public UIOperation() throws IOException {
         Properties browserProps = new Properties();
         try {
             String browserConfigPath = "settings.properties";
@@ -30,6 +30,8 @@ public class UIOperation {
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         firefoxOptions.setCapability("marionette", true);
         driver = new FirefoxDriver(firefoxOptions);
+        ReadObject object = new ReadObject();
+        allObjects = object.getObjectRepository();
     }
 
     public static WebElement waitTime(By by) {
@@ -43,20 +45,20 @@ public class UIOperation {
         driver.close();
     }
 
-    public void click(Properties p, String objectName, String objectType) throws Exception {
-        waitTime((this.getObject(p,objectName,objectType))).click();
+    public void click(String objectName, String objectType) throws Exception {
+        waitTime((this.getObject(allObjects,objectName,objectType))).click();
     }
 
-    public void setText(Properties p, String objectName, String objectType, String value) throws Exception {
-        waitTime((this.getObject(p,objectName,objectType))).sendKeys(value);
+    public void setText(String objectName, String objectType, String value) throws Exception {
+        waitTime((this.getObject(allObjects,objectName,objectType))).sendKeys(value);
     }
 
-    public void goToUrl(Properties p, String url){
-        driver.get(p.getProperty(url));
+    public void goToUrl(String url){
+        driver.get(allObjects.getProperty(url));
     }
 
-    public String getText(Properties p, String objectName, String objectType) throws Exception {
-        return waitTime((this.getObject(p,objectName,objectType))).getText();
+    public String getText(String objectName, String objectType) throws Exception {
+        return waitTime((this.getObject(allObjects,objectName,objectType))).getText();
     }
 
 
