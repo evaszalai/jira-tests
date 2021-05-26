@@ -53,7 +53,7 @@ public class EditIssueTest extends TestBase {
 
     @Test
     public void emptySummary() throws Exception {
-        operation.goToUrl("mtp145");
+        operation.goToUrl("mtp146");
         operation.click("editButton", "xpath");
         operation.clear("summary", "id");
         operation.setText("summary", "id", "");
