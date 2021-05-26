@@ -11,11 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 public class UIOperation {
     private static WebDriver driver;
-    private static ReadObject object;
     private static Properties allObjects;
 
     public UIOperation() throws IOException {
@@ -32,7 +30,7 @@ public class UIOperation {
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         firefoxOptions.setCapability("marionette", true);
         driver = new FirefoxDriver(firefoxOptions);
-        object = new ReadObject();
+        ReadObject object = new ReadObject();
         allObjects = object.getObjectRepository();
     }
 

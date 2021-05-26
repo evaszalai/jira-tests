@@ -1,9 +1,6 @@
 package com.codecool.jira.KDT_and_POM_Jira_tests.KDT.testCases;
 
-import com.codecool.jira.KDT_and_POM_Jira_tests.KDT.operation.ReadObject;
 import com.codecool.jira.KDT_and_POM_Jira_tests.KDT.operation.UIOperation;
-import org.junit.jupiter.api.BeforeAll;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
