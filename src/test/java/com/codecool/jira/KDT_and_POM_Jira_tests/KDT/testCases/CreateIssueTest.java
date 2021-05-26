@@ -93,6 +93,21 @@ public class CreateIssueTest extends TestBase{
         operation.createIssueInProject("TOUCAN project (TOUCAN)", "Task", "Toucan task");
     }
 
+    @Test
+    public void createSubtaskInTOUCAN() throws Exception {
+        operation.createSubtask("TOUCAN-1");
+    }
+
+    @Test
+    public void createSubtaskInJETI() throws Exception {
+        operation.createSubtask("JETI-1");
+    }
+
+    @Test
+    public void createSubtaskInCOALA() throws Exception {
+        operation.createSubtask("COALA-13");
+    }
+
     @AfterEach
     public void closeDriver(){
         UIOperation.quitDriver();

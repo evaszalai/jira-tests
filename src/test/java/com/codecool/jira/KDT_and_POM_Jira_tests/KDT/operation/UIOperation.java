@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class UIOperation {
     private static WebDriver driver;
@@ -93,6 +94,14 @@ public class UIOperation {
         checkIssueType(issueType);
         clickCancelIssue();
         acceptAlert();
+    }
+
+    public void createSubtask(String key) throws Exception {
+        driver.get("https://jira-auto.codecool.metastage.net/browse/" + key);
+        click("moreOptionsButton", "id");
+        click("createSubtaskOption", "css");
+        Assertions.assertEquals("Create Subtask : " + key, getText("subtaskModalHeader", "xpath"));
+        clickCancelIssue();
     }
 
     public void openCreateIssueScreen(String project, String issueType, String summary) throws Exception {
