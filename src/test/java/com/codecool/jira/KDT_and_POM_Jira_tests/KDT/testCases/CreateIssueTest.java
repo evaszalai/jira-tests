@@ -46,4 +46,13 @@ public class CreateIssueTest extends TestBase{
         String error = "No issues were found to match your search";
         Assertions.assertEquals(error, operation.getText("issueNotFound", "css"));
     }
+
+    @Test
+    public void createStoryInCOALA() throws Exception {
+        String project = "COALA project (COALA)";
+        String issueType = "Story";
+        operation.openCreateIssueScreen(project, issueType, "Coala story");
+        operation.checkProjectField(project);
+        operation.checkIssueType(issueType);
+    }
 }
