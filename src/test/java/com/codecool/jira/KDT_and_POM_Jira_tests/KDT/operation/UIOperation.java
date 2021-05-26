@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 public class UIOperation {
     private static WebDriver driver;
@@ -63,16 +62,20 @@ public class UIOperation {
         return waitTime((this.getObject(allObjects,objectName,objectType))).getText();
     }
 
+    public void clear(String objectName, String objectType) throws Exception {
+        waitTime((this.getObject(allObjects,objectName,objectType))).clear();
+    }
+
+    public void acceptAlert() {
+        driver.switchTo().alert().accept();
+    }
+
     public void clickCreateIssueSubmit() throws Exception {
         click("createIssueSubmit", "id");
     }
 
     public void clickCancelIssue() throws Exception {
         click("cancelCreateIssue", "xpath");
-    }
-
-    public void acceptAlert(){
-        driver.switchTo().alert().accept();
     }
 
     public String getAttribute(String attribute, String objectName, String objectType) throws Exception {
@@ -172,5 +175,4 @@ public class UIOperation {
             throw new Exception("Wrong object type");
         }
     }
-
 }
