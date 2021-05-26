@@ -58,6 +58,11 @@ public class UIOperation {
         driver.get(allObjects.getProperty(url));
     }
 
+    public void goToCompoundUrl(String base, String end){
+        String startOfUrl = allObjects.getProperty(base);
+        driver.get(startOfUrl + end);
+    }
+
     public String getText(String objectName, String objectType) throws Exception {
         return waitTime((this.getObject(allObjects,objectName,objectType))).getText();
     }
@@ -68,6 +73,13 @@ public class UIOperation {
 
     public void acceptAlert() {
         driver.switchTo().alert().accept();
+    }
+
+    public void login(String username, String password) throws Exception {
+        goToUrl("url");
+        setText("username", "id", username);
+        setText("password", "id", password);
+        click("loginbutton", "id");
     }
 
     public void clickCreateIssueSubmit() throws Exception {
