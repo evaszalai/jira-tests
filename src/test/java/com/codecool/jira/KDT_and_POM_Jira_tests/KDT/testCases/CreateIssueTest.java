@@ -1,13 +1,12 @@
 package com.codecool.jira.KDT_and_POM_Jira_tests.KDT.testCases;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import com.codecool.jira.KDT_and_POM_Jira_tests.KDT.operation.UIOperation;
+import org.junit.jupiter.api.*;
 
 public class CreateIssueTest extends TestBase{
 
-    @BeforeAll
-    public static void login() throws Exception {
+    @BeforeEach
+    public void login() throws Exception {
         setup();
         launchBrowser();
         operation.goToUrl("url");
@@ -35,6 +34,8 @@ public class CreateIssueTest extends TestBase{
         operation.openCreateIssueScreen("Main Testing Project (MTP)", "Story", "" );
         operation.clickCreateIssueSubmit();
         Assertions.assertEquals(errorMessage, operation.getText("errorMessage", "css"));
+        operation.clickCancelIssue();
+        operation.acceptAlert();
     }
 
     @Test
@@ -55,5 +56,45 @@ public class CreateIssueTest extends TestBase{
     @Test
     public void createBugInCOALA() throws Exception {
         operation.createIssueInProject("COALA project (COALA)", "Bug", "Coala bug" );
+    }
+
+    @Test
+    public void createTaskInCOALA() throws Exception {
+        operation.createIssueInProject("COALA project (COALA)", "Task", "Coala task" );
+    }
+
+    @Test
+    public void createStoryInJETI() throws Exception {
+        operation.createIssueInProject("JETI project (JETI)", "Story", "Jeti story");
+    }
+
+    @Test
+    public void createBugInJETI() throws Exception {
+        operation.createIssueInProject("JETI project (JETI)", "Bug", "Jeti bug");
+    }
+
+    @Test
+    public void createTaskInJETI() throws Exception {
+        operation.createIssueInProject("JETI project (JETI)", "Task", "Jeti task");
+    }
+
+    @Test
+    public void createStoryInTOUCAN() throws Exception {
+        operation.createIssueInProject("TOUCAN project (TOUCAN)", "Story", "Toucan story");
+    }
+
+    @Test
+    public void createBugInTOUCAN() throws Exception {
+        operation.createIssueInProject("TOUCAN project (TOUCAN)", "Bug", "Toucan bug");
+    }
+
+    @Test
+    public void createTaskInTOUCAN() throws Exception {
+        operation.createIssueInProject("TOUCAN project (TOUCAN)", "Task", "Toucan task");
+    }
+
+    @AfterEach
+    public void closeDriver(){
+        UIOperation.quitDriver();
     }
 }

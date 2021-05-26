@@ -91,6 +91,8 @@ public class UIOperation {
         openCreateIssueScreen(project, issueType, summary);
         checkProjectField(project);
         checkIssueType(issueType);
+        clickCancelIssue();
+        acceptAlert();
     }
 
     public void openCreateIssueScreen(String project, String issueType, String summary) throws Exception {
