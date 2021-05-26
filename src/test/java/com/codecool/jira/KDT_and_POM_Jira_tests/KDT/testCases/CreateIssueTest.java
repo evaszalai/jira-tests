@@ -51,4 +51,9 @@ public class CreateIssueTest extends TestBase{
     public void createStoryInCOALA() throws Exception {
         operation.createIssueInProject("COALA project (COALA)", "Story", "COALA Story");
     }
+
+    @Test
+    public void createBugInCOALA() throws Exception {
+        operation.createIssueInProject("COALA project (COALA)", "Bug", "Coala bug" );
+    }
 }
