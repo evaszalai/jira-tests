@@ -36,4 +36,14 @@ public class CreateIssueTest extends TestBase{
         operation.clickCreateIssueSubmit();
         Assertions.assertEquals(errorMessage, operation.getText("errorMessage", "css"));
     }
+
+    @Test
+    public void cancelButton() throws Exception {
+        operation.openCreateIssueScreen("Main Testing Project (MTP)", "Story", "ID 12345");
+        operation.clickCancelIssue();
+        operation.acceptAlert();
+        operation.goToUrl("issueID12345");
+        String error = "No issues were found to match your search";
+        Assertions.assertEquals(error, operation.getText("issueNotFound", "css"));
+    }
 }

@@ -65,6 +65,14 @@ public class UIOperation {
         click("createIssueSubmit", "id");
     }
 
+    public void clickCancelIssue() throws Exception {
+        click("cancelCreateIssue", "xpath");
+    }
+
+    public void acceptAlert(){
+        driver.switchTo().alert().accept();
+    }
+
     public void openCreateIssueScreen(String project, String issueType, String summary) throws Exception {
         click( "createButton", "id");
         click("projectField", "id");
