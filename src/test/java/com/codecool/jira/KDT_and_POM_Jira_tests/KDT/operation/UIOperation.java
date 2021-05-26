@@ -2,8 +2,11 @@ package com.codecool.jira.KDT_and_POM_Jira_tests.KDT.operation;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -33,12 +36,23 @@ public class UIOperation {
         allObjects = object.getObjectRepository();
     }
 
+    public static WebElement waitTime(By by) {
+        WebDriverWait wait = new WebDriverWait(driver,4);
+        WebElement seleniumlink;
+        seleniumlink= wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+        return seleniumlink;
+    }
+
+    public static void quitDriver() {
+        driver.close();
+    }
+
     public void click(String objectName, String objectType) throws Exception {
-        driver.findElement(this.getObject(allObjects,objectName,objectType)).click();
+        waitTime((this.getObject(allObjects,objectName,objectType))).click();
     }
 
     public void setText(String objectName, String objectType, String value) throws Exception {
-        driver.findElement(this.getObject(allObjects,objectName,objectType)).sendKeys(value);
+        waitTime((this.getObject(allObjects,objectName,objectType))).sendKeys(value);
     }
 
     public void goToUrl(String url){
@@ -46,7 +60,7 @@ public class UIOperation {
     }
 
     public String getText(String objectName, String objectType) throws Exception {
-        return driver.findElement(this.getObject(allObjects,objectName,objectType)).getText();
+        return waitTime((this.getObject(allObjects,objectName,objectType))).getText();
     }
 
 
