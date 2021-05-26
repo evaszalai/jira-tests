@@ -61,6 +61,20 @@ public class UIOperation {
         return waitTime((this.getObject(allObjects,objectName,objectType))).getText();
     }
 
+    public void openCreateIssueScreen(String project, String issueType, String summary) throws Exception {
+        click( "createButton", "id");
+        click("projectField", "id");
+        setText("projectField", "id", "");
+        setText("projectField", "id", project);
+        click("dialogScreen", "xpath");
+        click("issueType", "id");
+        setText("issueType", "id", "");
+        setText("issueType", "id", issueType);
+        click("dialogScreen", "xpath");
+        click("summary", "id");
+        setText("summary", "id", summary);
+    }
+
 
     /**
      * Find element BY using object type and value
