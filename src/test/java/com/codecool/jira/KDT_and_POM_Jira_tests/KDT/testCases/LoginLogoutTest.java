@@ -30,12 +30,14 @@ public class LoginLogoutTest {
         password = browserProps.getProperty("password");
         object = new ReadObject();
         allObjects = object.getObjectRepository();
-        operation = new UIOperation();
+
     }
 
     @BeforeEach
     public void goToURL() {
+        operation = new UIOperation();
         operation.goToUrl(allObjects, "url");
+        UIOperation.waitTime();
     }
 
     @Test
@@ -56,6 +58,8 @@ public class LoginLogoutTest {
         operation.click(allObjects, "profilePicture", "xpath");
         operation.click(allObjects, "viewProfile", "id");
         Assertions.assertEquals(username, operation.getText(allObjects, "name", "id"));
+        operation.click(allObjects, "profile", "xpath");
+        operation.click(allObjects, "logoutButton", "id");
     }
 
     @Test
@@ -76,5 +80,10 @@ public class LoginLogoutTest {
         Assertions.assertEquals(username, operation.getText(allObjects, "name", "id"));
         operation.click(allObjects, "profile", "xpath");
         operation.click(allObjects, "logoutButton", "id");
+    }
+
+    @AfterEach
+    public void quit() {
+        UIOperation.quitDriver();
     }
 }

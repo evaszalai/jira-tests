@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class UIOperation {
-    WebDriver driver;
+    private static WebDriver driver;
 
     public UIOperation(){
         Properties browserProps = new Properties();
@@ -27,7 +28,14 @@ public class UIOperation {
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         firefoxOptions.setCapability("marionette", true);
         driver = new FirefoxDriver(firefoxOptions);
+    }
 
+    public static void waitTime() {
+        WebDriverWait wait = new WebDriverWait(driver,4);
+    }
+
+    public static void quitDriver() {
+        driver.close();
     }
 
     public void click(Properties p, String objectName, String objectType) throws Exception {

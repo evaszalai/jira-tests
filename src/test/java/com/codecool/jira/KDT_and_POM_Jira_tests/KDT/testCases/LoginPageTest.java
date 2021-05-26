@@ -29,12 +29,14 @@ public class LoginPageTest {
         password = browserProps.getProperty("password");
         object = new ReadObject();
         allObjects = object.getObjectRepository();
-        operation = new UIOperation();
+
     }
 
     @BeforeEach
     public void goToURL() {
+        operation = new UIOperation();
         operation.goToUrl(allObjects, "loginPageURL");
+        UIOperation.waitTime();
     }
 
     @Test
@@ -63,5 +65,10 @@ public class LoginPageTest {
         Assertions.assertEquals(username, operation.getText(allObjects, "name", "id"));
         operation.click(allObjects, "profile", "xpath");
         operation.click(allObjects, "logoutButton", "id");
+    }
+
+    @AfterEach
+    public void quit() {
+        UIOperation.quitDriver();
     }
 }
