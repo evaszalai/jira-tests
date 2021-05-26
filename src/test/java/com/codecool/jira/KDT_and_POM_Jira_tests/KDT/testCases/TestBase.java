@@ -14,7 +14,7 @@ public class TestBase {
     public static UIOperation operation;
 
 
-    public static void setup() throws IOException {
+    public static void setup() {
         Properties browserProps = new Properties();
         try {
             String browserConfigPath = "settings.properties";
@@ -24,6 +24,9 @@ public class TestBase {
         }
         username = browserProps.getProperty("username");
         password = browserProps.getProperty("password");
+    }
+
+    public static void launchBrowser() throws IOException {
         operation = new UIOperation();
     }
 }

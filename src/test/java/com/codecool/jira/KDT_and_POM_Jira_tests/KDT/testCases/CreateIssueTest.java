@@ -9,6 +9,7 @@ public class CreateIssueTest extends TestBase{
     @BeforeAll
     public static void login() throws Exception {
         setup();
+        launchBrowser();
         operation.goToUrl("url");
         operation.setText("username", "id", username);
         operation.setText("password", "id", password);

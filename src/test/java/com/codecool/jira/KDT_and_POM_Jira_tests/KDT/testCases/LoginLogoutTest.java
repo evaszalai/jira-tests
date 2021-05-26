@@ -1,31 +1,13 @@
 package com.codecool.jira.KDT_and_POM_Jira_tests.KDT.testCases;
 
-import   com.codecool.jira.KDT_and_POM_Jira_tests.KDT.operation.ReadObject;
 import com.codecool.jira.KDT_and_POM_Jira_tests.KDT.operation.UIOperation;
 import org.junit.jupiter.api.*;
-
-
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Properties;
 
-public class LoginLogoutTest {
-    private static String username;
-    private static String password;
-    private static UIOperation operation;
-
-
+public class LoginLogoutTest extends TestBase{
     @BeforeAll
-    public static void setup() throws IOException {
-        Properties browserProps = new Properties();
-        try {
-            String browserConfigPath = "settings.properties";
-            browserProps.load(new FileInputStream(browserConfigPath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        username = browserProps.getProperty("username");
-        password = browserProps.getProperty("password");
+    public static void start() {
+        setup();
     }
 
     @BeforeEach

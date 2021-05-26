@@ -8,28 +8,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class LoginPageTest {
-    private static String username;
-    private static String password;
-    private static ReadObject object;
-    private static Properties allObjects;
-    private static UIOperation operation;
-
+public class LoginPageTest extends TestBase{
 
     @BeforeAll
-    public static void setup() throws IOException {
-        Properties browserProps = new Properties();
-        try {
-            String browserConfigPath = "settings.properties";
-            browserProps.load(new FileInputStream(browserConfigPath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        username = browserProps.getProperty("username");
-        password = browserProps.getProperty("password");
-        object = new ReadObject();
-        allObjects = object.getObjectRepository();
-
+    public static void start() throws IOException {
+        setup();
     }
 
     @BeforeEach
