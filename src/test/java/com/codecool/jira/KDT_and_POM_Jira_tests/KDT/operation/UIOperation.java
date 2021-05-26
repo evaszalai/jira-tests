@@ -82,6 +82,11 @@ public class UIOperation {
         click("loginbutton", "id");
     }
 
+    public void browseIssue(String issueID) throws Exception {
+        goToCompoundUrl("browseUrlBase", issueID);
+        Assertions.assertEquals(issueID, getText("key", "id"));
+    }
+
     public void clickCreateIssueSubmit() throws Exception {
         click("createIssueSubmit", "id");
     }

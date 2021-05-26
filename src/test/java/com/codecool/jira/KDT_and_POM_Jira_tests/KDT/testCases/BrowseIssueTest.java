@@ -21,11 +21,6 @@ public class BrowseIssueTest extends TestBase {
 
     @Test
     public void browseIssue() throws Exception {
-        String issueID = "MTP-146";
-        operation.goToCompoundUrl("browseUrlBase", issueID);
-        Assertions.assertEquals(issueID, operation.getText("key", "id"));
+        operation.browseIssue("MTP-146");
     }
-
-
-
 }
