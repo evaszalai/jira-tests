@@ -14,7 +14,7 @@ public class JiraLogin {
     @FindBy(id="login-form-password")
     WebElement password;
 
-    @FindBy(id="login-form-password")
+    @FindBy(id="login")
     WebElement loginButton;
 
     @FindBy(xpath="//div[@id='usernameerror']/p")
