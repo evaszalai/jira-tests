@@ -34,6 +34,9 @@ public class BrowseIssuePage {
     @FindBy(xpath = "//section[@id='create-subtask-dialog']/header/h2")
     WebElement subtaskScreenHeader;
 
+    @FindBy(id="key-val")
+    WebElement key;
+
     public BrowseIssuePage(WebDriver driver){
         this.driver = driver;
         driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
@@ -70,6 +73,11 @@ public class BrowseIssuePage {
 
     public String getErrorMessage(){
         return issueNotFound.getText();
+    }
+
+    public String browseIssue(String key){
+        driver.get("https://jira-auto.codecool.metastage.net/browse/" + key);
+        return this.key.getText();
     }
 
     public String createSubtaskInIssue(String key){
