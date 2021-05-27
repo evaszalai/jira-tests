@@ -56,6 +56,27 @@ public class BrowseIssueTest extends TestBase{
         Assertions.assertEquals(key, issue.browseIssue(key));
     }
 
+    @Test
+    public void browseJetiIssue1(){
+        String key = "JETI-1";
+        issue = new BrowseIssuePage(driver);
+        Assertions.assertEquals(key, issue.browseIssue(key));
+    }
+
+    @Test
+    public void browseJetiIssue2(){
+        String key = "JETI-2";
+        issue = new BrowseIssuePage(driver);
+        Assertions.assertEquals(key, issue.browseIssue(key));
+    }
+
+    @Test
+    public void browseJetiIssue3(){
+        String key = "JETI-3";
+        issue = new BrowseIssuePage(driver);
+        Assertions.assertEquals(key, issue.browseIssue(key));
+    }
+
     @AfterEach
     public void closeDriver(){
         driver.close();
