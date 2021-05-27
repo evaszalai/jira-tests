@@ -2,20 +2,23 @@ package com.codecool.jira.KDT_and_POM_Jira_tests.POM.Test;
 
 import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.BrowseIssuePage;
 import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.CreateIssueScreen;
-import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.JiraLogin;
 import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.NavBar;
 import org.junit.jupiter.api.*;
 
 public class CreateIssueTest extends TestBase {
     CreateIssueScreen screen;
     NavBar navBar;
-    JiraLogin login;
     BrowseIssuePage issue;
 
     private void createIssueInProject(String project, String issueType){
         screen = openCreateIssueScreen(project, issueType, "New issue");
         Assertions.assertEquals(project, screen.getProject());
         Assertions.assertEquals(issueType, screen.getIssueType());
+    }
+
+    private void createSubtaskInIssue(String key){
+        issue = new BrowseIssuePage(driver);
+        Assertions.assertEquals("Create Subtask : " + key, issue.createSubtaskInIssue(key));
     }
 
     private CreateIssueScreen openCreateIssueScreen(String project, String issueType, String summary){
@@ -32,11 +35,9 @@ public class CreateIssueTest extends TestBase {
     }
 
     @BeforeEach
-    public void login(){
+    public void loginToJira(){
         this.launchBrowser();
-        driver.get("https://jira-auto.codecool.metastage.net");
-        login = new JiraLogin(driver);
-        login.login(username, password);
+        this.login();
     }
 
     @Test
@@ -117,25 +118,13 @@ public class CreateIssueTest extends TestBase {
     }
 
     @Test
-    public void createSubtaskInTOUCAN(){
-        issue = new BrowseIssuePage(driver);
-        String key = "TOUCAN-1";
-        Assertions.assertEquals("Create Subtask : " + key, issue.createSubtaskInIssue(key));
-    }
+    public void createSubtaskInTOUCAN(){ createSubtaskInIssue("TOUCAN-1"); }
 
     @Test
-    public void createSubtaskInJETI(){
-        issue = new BrowseIssuePage(driver);
-        String key = "JETI-1";
-        Assertions.assertEquals("Create Subtask : " + key, issue.createSubtaskInIssue(key));
-    }
+    public void createSubtaskInJETI(){ createSubtaskInIssue("JETI-1"); }
 
     @Test
-    public void createSubtaskInCOALA(){
-        issue = new BrowseIssuePage(driver);
-        String key = "COALA-13";
-        Assertions.assertEquals("Create Subtask : " + key, issue.createSubtaskInIssue(key));
-    }
+    public void createSubtaskInCOALA(){ createSubtaskInIssue("COALA-13"); }
 
     @AfterEach
     public void closeDriver(){

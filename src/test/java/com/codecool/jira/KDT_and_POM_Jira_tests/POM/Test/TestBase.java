@@ -1,6 +1,7 @@
 package com.codecool.jira.KDT_and_POM_Jira_tests.POM.Test;
 
 import com.codecool.jira.KDT_and_POM_Jira_tests.KDT.operation.UIOperation;
+import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.JiraLogin;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -14,6 +15,7 @@ public abstract class TestBase {
     public static String username;
     public static String password;
     public static Properties browserProps;
+    public JiraLogin login;
 
     public static void setup() {
         browserProps = new Properties();
@@ -33,6 +35,12 @@ public abstract class TestBase {
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         firefoxOptions.setCapability("marionette", true);
         driver = new FirefoxDriver(firefoxOptions);
+    }
+
+    public void login(){
+        driver.get("https://jira-auto.codecool.metastage.net");
+        login = new JiraLogin(driver);
+        login.login(username, password);
     }
 
 }
