@@ -2,14 +2,12 @@ package com.codecool.jira.KDT_and_POM_Jira_tests.POM.Test;
 
 import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.BrowseIssuePage;
 import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.CreateIssueScreen;
-import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.JiraLogin;
 import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.NavBar;
 import org.junit.jupiter.api.*;
 
 public class CreateIssueTest extends TestBase {
     CreateIssueScreen screen;
     NavBar navBar;
-    JiraLogin login;
     BrowseIssuePage issue;
 
     private void createIssueInProject(String project, String issueType){
@@ -37,11 +35,9 @@ public class CreateIssueTest extends TestBase {
     }
 
     @BeforeEach
-    public void login(){
+    public void loginToJira(){
         this.launchBrowser();
-        driver.get("https://jira-auto.codecool.metastage.net");
-        login = new JiraLogin(driver);
-        login.login(username, password);
+        this.login();
     }
 
     @Test
