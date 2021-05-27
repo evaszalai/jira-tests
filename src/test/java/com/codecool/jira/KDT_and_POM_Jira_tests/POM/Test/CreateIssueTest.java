@@ -32,16 +32,7 @@ public class CreateIssueTest extends TestBase {
         navBar = new NavBar(driver);
         navBar.clickCreateButton();
         screen = new CreateIssueScreen(driver);
-        screen.clickProjectField();
-        screen.setProject("");
-        screen.setProject(project);
-        screen.clickOutSide();
-        screen.clickIssueTypeField();
-        screen.setIssueType("");
-        screen.setIssueType(issueType);
-        screen.clickOutSide();
-        screen.clickSummaryField();
-        screen.setSummary(summary);
+        screen.setFields(project, issueType, summary);
         screen.clickSubmit();
         screen.clickOnNotification();
         issue = new BrowseIssuePage(driver);

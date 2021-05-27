@@ -79,4 +79,17 @@ public class CreateIssueScreen {
     public void clickSummaryField(){
         summaryField.click();
     }
+
+    public void setFields(String project, String issueType, String summary){
+        clickProjectField();
+        setProject("");
+        setProject(project);
+        clickOutSide();
+        clickIssueTypeField();
+        setIssueType("");
+        setIssueType(issueType);
+        clickOutSide();
+        clickSummaryField();
+        setSummary(summary);
+    }
 }
