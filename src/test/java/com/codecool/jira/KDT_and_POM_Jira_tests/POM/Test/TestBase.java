@@ -13,9 +13,10 @@ public abstract class TestBase {
     public static WebDriver driver;
     public static String username;
     public static String password;
+    public static Properties browserProps;
 
     public static void setup() {
-        Properties browserProps = new Properties();
+        browserProps = new Properties();
         try {
             String browserConfigPath = "settings.properties";
             browserProps.load(new FileInputStream(browserConfigPath));
@@ -24,6 +25,9 @@ public abstract class TestBase {
         }
         username = browserProps.getProperty("username");
         password = browserProps.getProperty("password");
+    }
+
+    public void launchBrowser(){
         String webdriverPath = browserProps.getProperty("webdriver");
         System.setProperty("webdriver.gecko.driver", webdriverPath);
         FirefoxOptions firefoxOptions = new FirefoxOptions();

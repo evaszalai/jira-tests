@@ -28,6 +28,7 @@ public class CreateIssueTest extends TestBase {
 
     @BeforeEach
     public void login(){
+        this.launchBrowser();
         driver.get("https://jira-auto.codecool.metastage.net");
         login = new JiraLogin(driver);
         login.login(username, password);
