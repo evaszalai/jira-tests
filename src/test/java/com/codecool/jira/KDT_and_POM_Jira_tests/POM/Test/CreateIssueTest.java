@@ -52,6 +52,19 @@ public class CreateIssueTest extends TestBase {
         Assertions.assertEquals(errorMessage, screen.getErrorMessage());
     }
 
+    @Test
+    public void cancelButton(){
+        navBar = new NavBar(driver);
+        navBar.clickCreateButton();
+        screen = new CreateIssueScreen(driver);
+        screen.setFields("Main Testing Project (MTP)", "Story", "ID 12345");
+        screen.clickCancel();
+        driver.switchTo().alert().accept();
+        driver.get("https://jira-auto.codecool.metastage.net/issues/?jql=summary%20~%20%27ID%2012345%27%20AND%20createdDate%20%3E%3D%20startOfDay()");
+        issue = new BrowseIssuePage(driver);
+        Assertions.assertEquals("No issues were found to match your search", issue.getErrorMessage());
+    }
+
     @AfterEach
     public void closeDriver(){
         driver.close();

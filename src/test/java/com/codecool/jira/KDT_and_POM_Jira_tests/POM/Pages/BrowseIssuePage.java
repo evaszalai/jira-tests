@@ -26,6 +26,9 @@ public class BrowseIssuePage {
     @FindBy(id="create-subtask")
     WebElement createSubtask;
 
+    @FindBy(xpath="//*[@id=\"main\"]/div/div[2]/div/div/div/div/div/div/h2")
+    WebElement issueNotFound;
+
     public BrowseIssuePage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -57,6 +60,10 @@ public class BrowseIssuePage {
 
     public void clickCreateSubtask(){
         createSubtask.click();
+    }
+
+    public String getErrorMessage(){
+        return issueNotFound.getText();
     }
 
 }
