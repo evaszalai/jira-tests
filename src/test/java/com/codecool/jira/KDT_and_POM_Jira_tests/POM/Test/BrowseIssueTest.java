@@ -8,6 +8,11 @@ public class BrowseIssueTest extends TestBase{
     JiraLogin login;
     BrowseIssuePage issue;
 
+    private void browseIssue(String key){
+        issue = new BrowseIssuePage(driver);
+        Assertions.assertEquals(key, issue.browseIssue(key));
+    }
+
     @BeforeAll
     public static void start(){
         setup();
@@ -23,9 +28,7 @@ public class BrowseIssueTest extends TestBase{
 
     @Test
     public void browseIssue(){
-        String key = "MTP-146";
-        issue = new BrowseIssuePage(driver);
-        Assertions.assertEquals(key, issue.browseIssue(key));
+        browseIssue("MTP-146");
     }
 
     @Test
@@ -37,44 +40,47 @@ public class BrowseIssueTest extends TestBase{
 
     @Test
     public void browseCoalaIssue1(){
-        String key = "COALA-1";
-        issue = new BrowseIssuePage(driver);
-        Assertions.assertEquals(key, issue.browseIssue(key));
+        browseIssue("COALA-1");
     }
 
     @Test
     public void browseCoalaIssue2(){
-        String key = "COALA-2";
-        issue = new BrowseIssuePage(driver);
-        Assertions.assertEquals(key, issue.browseIssue(key));
+        browseIssue("COALA-2");
     }
 
     @Test
     public void browseCoalaIssue3(){
-        String key = "COALA-3";
-        issue = new BrowseIssuePage(driver);
-        Assertions.assertEquals(key, issue.browseIssue(key));
+        browseIssue("COALA-3");
     }
 
     @Test
     public void browseJetiIssue1(){
-        String key = "JETI-1";
-        issue = new BrowseIssuePage(driver);
-        Assertions.assertEquals(key, issue.browseIssue(key));
+        browseIssue("JETI-1");
     }
 
     @Test
     public void browseJetiIssue2(){
-        String key = "JETI-2";
-        issue = new BrowseIssuePage(driver);
-        Assertions.assertEquals(key, issue.browseIssue(key));
+        browseIssue("JETI-2");
     }
 
     @Test
     public void browseJetiIssue3(){
-        String key = "JETI-3";
-        issue = new BrowseIssuePage(driver);
-        Assertions.assertEquals(key, issue.browseIssue(key));
+        browseIssue("JETI-3");
+    }
+
+    @Test
+    public void browseToucanIssue1(){
+        browseIssue("TOUCAN-1");
+    }
+
+    @Test
+    public void browseToucanIssue2(){
+        browseIssue("TOUCAN-2");
+    }
+
+    @Test
+    public void browseToucanIssue3(){
+        browseIssue("TOUCAN-3");
     }
 
     @AfterEach
