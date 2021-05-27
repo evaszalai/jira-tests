@@ -9,7 +9,6 @@ public class BrowseIssueTest extends TestBase{
     BrowseIssuePage issue;
 
     private void browseIssue(String key){
-        issue = new BrowseIssuePage(driver);
         Assertions.assertEquals(key, issue.browseIssue(key));
     }
 
@@ -24,6 +23,7 @@ public class BrowseIssueTest extends TestBase{
         driver.get("https://jira-auto.codecool.metastage.net");
         login = new JiraLogin(driver);
         login.login(username, password);
+        issue = new BrowseIssuePage(driver);
     }
 
     @Test
@@ -34,7 +34,6 @@ public class BrowseIssueTest extends TestBase{
     @Test
     public void browseNonExistentIssue(){
         driver.get("https://jira-auto.codecool.metastage.net/browse/COALA-5");
-        issue = new BrowseIssuePage(driver);
         Assertions.assertEquals("You can't view this issue", issue.issueNotAvailable());
     }
 
