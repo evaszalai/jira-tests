@@ -13,12 +13,17 @@ public class CreateIssueTest extends TestBase {
     BrowseIssuePage issue;
 
     private void createIssueInProject(String project, String issueType){
+        screen = openCreateIssueScreen(project, issueType, "New issue");
+        Assertions.assertEquals(project, screen.getProject());
+        Assertions.assertEquals(issueType, screen.getIssueType());
+    }
+
+    private CreateIssueScreen openCreateIssueScreen(String project, String issueType, String summary){
         navBar = new NavBar(driver);
         navBar.clickCreateButton();
         screen = new CreateIssueScreen(driver);
-        screen.setFields(project, issueType, project + issueType);
-        Assertions.assertEquals(project, screen.getProject());
-        Assertions.assertEquals(issueType, screen.getIssueType());
+        screen.setFields(project, issueType, summary);
+        return screen;
     }
 
     @BeforeAll
@@ -39,10 +44,7 @@ public class CreateIssueTest extends TestBase {
         String project = "Main Testing Project (MTP)";
         String issueType = "Bug";
         String summary = "Test create issue";
-        navBar = new NavBar(driver);
-        navBar.clickCreateButton();
-        screen = new CreateIssueScreen(driver);
-        screen.setFields(project, issueType, summary);
+        screen = openCreateIssueScreen(project, issueType, summary);
         screen.clickSubmit();
         screen.clickOnNotification();
         issue = new BrowseIssuePage(driver);
@@ -54,20 +56,14 @@ public class CreateIssueTest extends TestBase {
     @Test
     public void createIssueWithoutSummary(){
         String errorMessage = "You must specify a summary of the issue.";
-        navBar = new NavBar(driver);
-        navBar.clickCreateButton();
-        screen = new CreateIssueScreen(driver);
-        screen.setFields("Main Testing Project (MTP)", "Bug", "");
+        screen = openCreateIssueScreen("Main Testing Project (MTP)", "Bug", "");
         screen.clickSubmit();
         Assertions.assertEquals(errorMessage, screen.getErrorMessage());
     }
 
     @Test
     public void cancelButton(){
-        navBar = new NavBar(driver);
-        navBar.clickCreateButton();
-        screen = new CreateIssueScreen(driver);
-        screen.setFields("Main Testing Project (MTP)", "Story", "ID 12345");
+        screen = openCreateIssueScreen("Main Testing Project (MTP)", "Story", "ID 12345");
         screen.clickCancel();
         driver.switchTo().alert().accept();
         driver.get("https://jira-auto.codecool.metastage.net/issues/?jql=summary%20~%20%27ID%2012345%27%20AND%20createdDate%20%3E%3D%20startOfDay()");
