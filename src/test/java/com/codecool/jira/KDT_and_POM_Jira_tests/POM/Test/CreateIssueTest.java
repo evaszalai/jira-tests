@@ -126,6 +126,20 @@ public class CreateIssueTest extends TestBase {
         Assertions.assertEquals("Create Subtask : " + key, issue.createSubtaskInIssue(key));
     }
 
+    @Test
+    public void createSubtaskInJETI(){
+        issue = new BrowseIssuePage(driver);
+        String key = "JETI-1";
+        Assertions.assertEquals("Create Subtask : " + key, issue.createSubtaskInIssue(key));
+    }
+
+    @Test
+    public void createSubtaskInCOALA(){
+        issue = new BrowseIssuePage(driver);
+        String key = "COALA-13";
+        Assertions.assertEquals("Create Subtask : " + key, issue.createSubtaskInIssue(key));
+    }
+
     @AfterEach
     public void closeDriver(){
         driver.close();
