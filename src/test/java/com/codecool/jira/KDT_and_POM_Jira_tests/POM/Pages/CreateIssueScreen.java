@@ -34,6 +34,9 @@ public class CreateIssueScreen {
     @FindBy(xpath="//div[@id='aui-flag-container']/div/div/a")
     WebElement notification;
 
+    @FindBy(xpath="//*[@id=\"dialog-form\"]/div/div[2]/div[1]/div")
+    WebElement errorMessage;
+
     public CreateIssueScreen(WebDriver driver){
         this.driver = driver;
         driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS) ;
@@ -78,6 +81,10 @@ public class CreateIssueScreen {
 
     public void clickSummaryField(){
         summaryField.click();
+    }
+
+    public String getErrorMessage(){
+        return errorMessage.getText();
     }
 
     public void setFields(String project, String issueType, String summary){

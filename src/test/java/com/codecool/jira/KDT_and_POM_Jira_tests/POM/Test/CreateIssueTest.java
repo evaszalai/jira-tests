@@ -41,6 +41,17 @@ public class CreateIssueTest extends TestBase {
         Assertions.assertEquals("Main Testing Project", issue.getProjectName());
     }
 
+    @Test
+    public void createIssueWithoutSummary(){
+        String errorMessage = "You must specify a summary of the issue.";
+        navBar = new NavBar(driver);
+        navBar.clickCreateButton();
+        screen = new CreateIssueScreen(driver);
+        screen.setFields("Main Testing Project (MTP)", "Bug", "");
+        screen.clickSubmit();
+        Assertions.assertEquals(errorMessage, screen.getErrorMessage());
+    }
+
     @AfterEach
     public void closeDriver(){
         driver.close();
