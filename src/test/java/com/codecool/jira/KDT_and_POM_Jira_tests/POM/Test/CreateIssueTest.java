@@ -18,6 +18,11 @@ public class CreateIssueTest extends TestBase {
         Assertions.assertEquals(issueType, screen.getIssueType());
     }
 
+    private void createSubtaskInIssue(String key){
+        issue = new BrowseIssuePage(driver);
+        Assertions.assertEquals("Create Subtask : " + key, issue.createSubtaskInIssue(key));
+    }
+
     private CreateIssueScreen openCreateIssueScreen(String project, String issueType, String summary){
         navBar = new NavBar(driver);
         navBar.clickCreateButton();
@@ -117,25 +122,13 @@ public class CreateIssueTest extends TestBase {
     }
 
     @Test
-    public void createSubtaskInTOUCAN(){
-        issue = new BrowseIssuePage(driver);
-        String key = "TOUCAN-1";
-        Assertions.assertEquals("Create Subtask : " + key, issue.createSubtaskInIssue(key));
-    }
+    public void createSubtaskInTOUCAN(){ createSubtaskInIssue("TOUCAN-1"); }
 
     @Test
-    public void createSubtaskInJETI(){
-        issue = new BrowseIssuePage(driver);
-        String key = "JETI-1";
-        Assertions.assertEquals("Create Subtask : " + key, issue.createSubtaskInIssue(key));
-    }
+    public void createSubtaskInJETI(){ createSubtaskInIssue("JETI-1"); }
 
     @Test
-    public void createSubtaskInCOALA(){
-        issue = new BrowseIssuePage(driver);
-        String key = "COALA-13";
-        Assertions.assertEquals("Create Subtask : " + key, issue.createSubtaskInIssue(key));
-    }
+    public void createSubtaskInCOALA(){ createSubtaskInIssue("COALA-13"); }
 
     @AfterEach
     public void closeDriver(){
