@@ -47,8 +47,16 @@ public class CreateIssueScreen {
         projectField.sendKeys(project);
     }
 
+    public String getProject(){
+        return projectField.getAttribute("value");
+    }
+
     public void setIssueType(String issueType){
         issueTypeField.sendKeys(issueType);
+    }
+
+    public String getIssueType(){
+        return issueTypeField.getAttribute("value");
     }
 
     public void setSummary(String summary){

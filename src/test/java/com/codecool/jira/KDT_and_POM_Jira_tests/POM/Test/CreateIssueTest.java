@@ -65,6 +65,16 @@ public class CreateIssueTest extends TestBase {
         Assertions.assertEquals("No issues were found to match your search", issue.getErrorMessage());
     }
 
+    @Test
+    public void createStoryInCOALA(){
+        navBar = new NavBar(driver);
+        navBar.clickCreateButton();
+        screen = new CreateIssueScreen(driver);
+        screen.setFields("COALA project (COALA)", "Story", "COALA Story");
+        Assertions.assertEquals("COALA project (COALA)", screen.getProject());
+        Assertions.assertEquals("Story", screen.getIssueType());
+    }
+
     @AfterEach
     public void closeDriver(){
         driver.close();
