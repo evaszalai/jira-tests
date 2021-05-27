@@ -12,6 +12,15 @@ public class CreateIssueTest extends TestBase {
     JiraLogin login;
     BrowseIssuePage issue;
 
+    private void createIssueInProject(String project, String issueType){
+        navBar = new NavBar(driver);
+        navBar.clickCreateButton();
+        screen = new CreateIssueScreen(driver);
+        screen.setFields(project, issueType, project + issueType);
+        Assertions.assertEquals(project, screen.getProject());
+        Assertions.assertEquals(issueType, screen.getIssueType());
+    }
+
     @BeforeAll
     public static void start(){
         setup();
@@ -67,12 +76,17 @@ public class CreateIssueTest extends TestBase {
 
     @Test
     public void createStoryInCOALA(){
-        navBar = new NavBar(driver);
-        navBar.clickCreateButton();
-        screen = new CreateIssueScreen(driver);
-        screen.setFields("COALA project (COALA)", "Story", "COALA Story");
-        Assertions.assertEquals("COALA project (COALA)", screen.getProject());
-        Assertions.assertEquals("Story", screen.getIssueType());
+        createIssueInProject("COALA project (COALA)", "Story");
+    }
+
+    @Test
+    public void createBugInCOALA(){
+        createIssueInProject("COALA project (COALA)", "Bug");
+    }
+
+    @Test
+    public void createTaskInCOALA(){
+        createIssueInProject("COALA project (COALA)", "Task");
     }
 
     @AfterEach
