@@ -117,7 +117,7 @@ public class UIOperation {
     }
 
     public void createSubtask(String key) throws Exception {
-        driver.get("https://jira-auto.codecool.metastage.net/browse/" + key);
+        goToCompoundUrl("browseUrlBase", key);
         click("moreOptionsButton", "id");
         click("createSubtaskOption", "css");
         Assertions.assertEquals("Create Subtask : " + key, getText("subtaskModalHeader", "xpath"));
