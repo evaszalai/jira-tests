@@ -46,7 +46,7 @@ public class BrowseProjectTest extends TestBase {
     @Test
     public void browseLion() throws Exception {
         operation.goToUrl("lionURL");
-        Assertions.assertEquals("lion", operation.getText("projectName", "xpath"));
+        Assertions.assertEquals("You can't view this project", operation.getText("lionMessage", "xpath"));
     }
 
     @AfterEach
