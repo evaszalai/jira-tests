@@ -39,7 +39,7 @@ public class CreateIssueScreen {
 
     public CreateIssueScreen(WebDriver driver){
         this.driver = driver;
-        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS) ;
+        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
         PageFactory.initElements(driver, this);
     }
 

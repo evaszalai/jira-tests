@@ -119,6 +119,13 @@ public class CreateIssueTest extends TestBase {
         createIssueInProject("TOUCAN project (TOUCAN)", "Task");
     }
 
+    @Test
+    public void createSubtaskInTOUCAN(){
+        issue = new BrowseIssuePage(driver);
+        String key = "TOUCAN-1";
+        Assertions.assertEquals("Create Subtask : " + key, issue.createSubtaskInIssue(key));
+    }
+
     @AfterEach
     public void closeDriver(){
         driver.close();
