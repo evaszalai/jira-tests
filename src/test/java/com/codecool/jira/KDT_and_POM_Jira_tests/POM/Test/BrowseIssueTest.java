@@ -1,11 +1,9 @@
 package com.codecool.jira.KDT_and_POM_Jira_tests.POM.Test;
 
 import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.BrowseIssuePage;
-import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.JiraLogin;
 import org.junit.jupiter.api.*;
 
 public class BrowseIssueTest extends TestBase{
-    JiraLogin login;
     BrowseIssuePage issue;
 
     private void browseIssue(String key){
@@ -18,11 +16,9 @@ public class BrowseIssueTest extends TestBase{
     }
 
     @BeforeEach
-    public void login(){
+    public void loginToJira(){
         this.launchBrowser();
-        driver.get("https://jira-auto.codecool.metastage.net");
-        login = new JiraLogin(driver);
-        login.login(username, password);
+        this.login();
         issue = new BrowseIssuePage(driver);
     }
 
