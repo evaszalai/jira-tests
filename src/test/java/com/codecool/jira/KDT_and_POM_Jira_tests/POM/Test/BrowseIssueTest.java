@@ -35,6 +35,27 @@ public class BrowseIssueTest extends TestBase{
         Assertions.assertEquals("You can't view this issue", issue.issueNotAvailable());
     }
 
+    @Test
+    public void browseCoalaIssue1(){
+        String key = "COALA-1";
+        issue = new BrowseIssuePage(driver);
+        Assertions.assertEquals(key, issue.browseIssue(key));
+    }
+
+    @Test
+    public void browseCoalaIssue2(){
+        String key = "COALA-2";
+        issue = new BrowseIssuePage(driver);
+        Assertions.assertEquals(key, issue.browseIssue(key));
+    }
+
+    @Test
+    public void browseCoalaIssue3(){
+        String key = "COALA-3";
+        issue = new BrowseIssuePage(driver);
+        Assertions.assertEquals(key, issue.browseIssue(key));
+    }
+
     @AfterEach
     public void closeDriver(){
         driver.close();
