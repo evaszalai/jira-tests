@@ -4,10 +4,7 @@ import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.BrowseIssuePage;
 import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.CreateIssueScreen;
 import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.JiraLogin;
 import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.NavBar;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 public class CreateIssueTest extends TestBase {
     CreateIssueScreen screen;
@@ -51,6 +48,11 @@ public class CreateIssueTest extends TestBase {
         Assertions.assertEquals(summary, issue.getSummary());
         Assertions.assertEquals(issueType, issue.getIssueType());
         Assertions.assertEquals("Main Testing Project", issue.getProjectName());
+    }
+
+    @AfterEach
+    public void closeDriver(){
+        driver.close();
     }
 
 }
