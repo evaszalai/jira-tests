@@ -28,6 +28,13 @@ public class BrowseIssueTest extends TestBase{
         Assertions.assertEquals(key, issue.browseIssue(key));
     }
 
+    @Test
+    public void browseNonExistentIssue(){
+        driver.get("https://jira-auto.codecool.metastage.net/browse/COALA-5");
+        issue = new BrowseIssuePage(driver);
+        Assertions.assertEquals("You can't view this issue", issue.issueNotAvailable());
+    }
+
     @AfterEach
     public void closeDriver(){
         driver.close();
