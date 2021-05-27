@@ -89,6 +89,36 @@ public class CreateIssueTest extends TestBase {
         createIssueInProject("COALA project (COALA)", "Task");
     }
 
+    @Test
+    public void createStoryInJETI(){
+        createIssueInProject("JETI project (JETI)", "Story");
+    }
+
+    @Test
+    public void createBugInJETI(){
+        createIssueInProject("JETI project (JETI)", "Bug");
+    }
+
+    @Test
+    public void createTaskInJETI(){
+        createIssueInProject("JETI project (JETI)", "Task");
+    }
+
+    @Test
+    public void createStoryInTOUCAN() {
+        createIssueInProject("TOUCAN project (TOUCAN)", "Story");
+    }
+
+    @Test
+    public void createBugInTOUCAN() {
+        createIssueInProject("TOUCAN project (TOUCAN)", "Bug");
+    }
+
+    @Test
+    public void createTaskInTOUCAN() {
+        createIssueInProject("TOUCAN project (TOUCAN)", "Task");
+    }
+
     @AfterEach
     public void closeDriver(){
         driver.close();
