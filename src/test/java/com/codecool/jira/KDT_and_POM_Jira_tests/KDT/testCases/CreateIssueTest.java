@@ -13,10 +13,7 @@ public class CreateIssueTest extends TestBase{
     @BeforeEach
     public void login() throws Exception {
         launchBrowser();
-        operation.goToUrl("url");
-        operation.setText("username", "id", username);
-        operation.setText("password", "id", password);
-        operation.click("loginbutton", "id");
+        operation.login(username, password);
     }
 
     @Test
