@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.concurrent.TimeUnit;
+
 public class JiraLogin {
     WebDriver driver;
 
@@ -22,6 +24,7 @@ public class JiraLogin {
 
     public JiraLogin(WebDriver driver){
         this.driver = driver;
+        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
         PageFactory.initElements(driver, this);
     }
 

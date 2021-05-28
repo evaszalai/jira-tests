@@ -26,7 +26,8 @@ public class CreateIssueTest extends TestBase{
         operation.click("createdIssueNotification", "xpath");
         Assertions.assertEquals(summary, operation.getText("summaryValue", "id"));
         Assertions.assertEquals(issueType, operation.getText("issueTypeValue", "id"));
-        Assertions.assertEquals("Main Testing Project", operation.getText("projectNameValue", "id"));
+        Assertions.assertEquals("Main Testing Project",
+                operation.getText("projectNameValue", "id"));
     }
 
     @Test
@@ -41,7 +42,8 @@ public class CreateIssueTest extends TestBase{
 
     @Test
     public void cancelButton() throws Exception {
-        operation.openCreateIssueScreen("Main Testing Project (MTP)", "Story", "ID 12345");
+        operation.openCreateIssueScreen("Main Testing Project (MTP)",
+                "Story", "ID 12345");
         operation.clickCancelIssue();
         operation.acceptAlert();
         operation.goToUrl("issueID12345");

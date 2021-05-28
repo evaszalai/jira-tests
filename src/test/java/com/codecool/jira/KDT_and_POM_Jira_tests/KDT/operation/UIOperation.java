@@ -112,8 +112,6 @@ public class UIOperation {
         openCreateIssueScreen(project, issueType, summary);
         checkProjectField(project);
         checkIssueType(issueType);
-        clickCancelIssue();
-        acceptAlert();
     }
 
     public void createSubtask(String key) throws Exception {
@@ -121,7 +119,6 @@ public class UIOperation {
         click("moreOptionsButton", "id");
         click("createSubtaskOption", "css");
         Assertions.assertEquals("Create Subtask : " + key, getText("subtaskModalHeader", "xpath"));
-        clickCancelIssue();
     }
 
     public void openCreateIssueScreen(String project, String issueType, String summary) throws Exception {
