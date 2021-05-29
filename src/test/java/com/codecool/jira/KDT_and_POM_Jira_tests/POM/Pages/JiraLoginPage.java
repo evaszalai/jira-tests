@@ -1,4 +1,47 @@
 package com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 public class JiraLoginPage {
+    WebDriver driver;
+
+    @FindBy(id="login-form-username")
+    WebElement username;
+
+    @FindBy(id="login-form-password")
+    WebElement password;
+
+    @FindBy(id="login-form-submit")
+    WebElement loginButton;
+
+    @FindBy(xpath="//form[@id='login-form']/div/div/p")
+    WebElement wrongLoginMessage;
+
+    public JiraLoginPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public void setUserName(String userName){
+        username.sendKeys(userName);
+    }
+
+    public void setPassword(String strPassword){
+        password.sendKeys(strPassword);
+    }
+
+    public void clickLogin(){
+        loginButton.click();
+    }
+
+    public String getErrorMessage(){
+        return wrongLoginMessage.getText();
+    }
+
+    public void login(String strUserName,String strPassword){
+        this.setUserName(strUserName);
+        this.setPassword(strPassword);
+        this.clickLogin();
+    }
 }

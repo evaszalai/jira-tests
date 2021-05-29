@@ -1,17 +1,13 @@
 package com.codecool.jira.KDT_and_POM_Jira_tests.POM.Test;
 
-import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.JiraLogin;
-import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.LogoutPage;
-import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.NavBar;
-import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.ProfilePage;
-import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Test.TestBase;
+import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class LoginLogoutTest extends TestBase {
-    JiraLogin login;
+public class LoginPageTest extends TestBase {
+    JiraLoginPage login;
     NavBar navBar;
     ProfilePage profilePage;
     LogoutPage logoutPage;
@@ -23,28 +19,12 @@ public class LoginLogoutTest extends TestBase {
 
     @BeforeEach
     public void goToUrl(){
-        driver.get("https://jira-auto.codecool.metastage.net");
-    }
-
-    @Test
-    public void emptyCredentials() {
-        login = new JiraLogin(driver);
-        login.clickLogin();
-        Assertions.assertEquals("Sorry, your username and password are incorrect - please try again.",
-                login.getErrorMessage());
-    }
-
-    @Test
-    public void notRegisteredUser(){
-        login = new JiraLogin(driver);
-        login.login("invalid", "invalid");
-        Assertions.assertEquals("Sorry, your username and password are incorrect - please try again.",
-                login.getErrorMessage());
+        driver.get("https://jira-auto.codecool.metastage.net/login.jsp");
     }
 
     @Test
     public void invalidPassword() {
-        login = new JiraLogin(driver);
+        login = new JiraLoginPage(driver);
         login.login("invalid", "invalid");
         Assertions.assertEquals("Sorry, your username and password are incorrect - please try again.",
                 login.getErrorMessage());
@@ -60,7 +40,7 @@ public class LoginLogoutTest extends TestBase {
 
     @Test
     public void successfulLogin() {
-        login = new JiraLogin(driver);
+        login = new JiraLoginPage(driver);
         login.login(username, password);
         navBar = new NavBar(driver);
         navBar.clickProfilePicture();
