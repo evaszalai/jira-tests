@@ -22,9 +22,10 @@ public class CreateIssueTest extends TestBase {
         return dataFromCSV;
     }
 
-    private void createSubtaskInIssue(String key){
-        issue = new BrowseIssuePage(driver);
-        Assertions.assertEquals("Create Subtask : " + key, issue.createSubtaskInIssue(key));
+    public static String[][] subtask() throws IOException, CsvValidationException {
+        String csvDataFilePath = "src/test/java/com/codecool/jira/KDT_and_POM_Jira_tests/resources/SubtaskIssueKeys.csv";
+        String[][] dataFromCSV = CSVDataReaders.getCSVData(csvDataFilePath, ',');
+        return dataFromCSV;
     }
 
     private CreateIssueScreen openCreateIssueScreen(String project, String issueType, String summary){
@@ -86,18 +87,15 @@ public class CreateIssueTest extends TestBase {
         Assertions.assertEquals(issueType, screen.getIssueType());
     }
 
-    @Test
-    public void createSubtaskInTOUCAN(){ createSubtaskInIssue("TOUCAN-1"); }
-
-    @Test
-    public void createSubtaskInJETI(){ createSubtaskInIssue("JETI-1"); }
-
-    @Test
-    public void createSubtaskInCOALA(){ createSubtaskInIssue("COALA-13"); }
+    @MethodSource("subtask")
+    @ParameterizedTest
+    public void createSubtaskInIssue(String key){
+        issue = new BrowseIssuePage(driver);
+        Assertions.assertEquals("Create Subtask : " + key, issue.createSubtaskInIssue(key));
+    }
 
     @AfterEach
     public void closeDriver(){
         driver.close();
     }
-
 }
