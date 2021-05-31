@@ -1,85 +1,44 @@
 package com.codecool.jira.KDT_and_POM_Jira_tests.POM.Test;
 
+import com.codecool.jira.KDT_and_POM_Jira_tests.POM.CSVDataReaders;
 import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.BrowseIssuePage;
+import com.opencsv.exceptions.CsvValidationException;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
-public class BrowseIssueTest extends TestBase{
+import java.io.IOException;
+
+public class BrowseIssueTest extends TestBase {
     BrowseIssuePage issue;
 
-    private void browseIssue(String key){
-        Assertions.assertEquals(key, issue.browseIssue(key));
+    public static String[][] dp() throws IOException, CsvValidationException {
+        String csvDataFilePath = "src/test/java/com/codecool/jira/KDT_and_POM_Jira_tests/resources/IssueKeys.csv";
+        String[][] dataFromCSV = CSVDataReaders.getCSVData(csvDataFilePath, ',');
+        return dataFromCSV;
     }
 
     @BeforeAll
-    public static void start(){
+    public static void start() {
         setup();
     }
 
     @BeforeEach
-    public void loginToJira(){
+    public void loginToJira() {
         this.launchBrowser();
         this.login();
         issue = new BrowseIssuePage(driver);
     }
 
-    @Test
-    public void browseIssue(){
-        browseIssue("MTP-146");
+    @MethodSource("dp")
+    @ParameterizedTest
+    public void browseIssue(String key) {
+        Assertions.assertEquals(key, issue.browseIssue(key));
     }
 
     @Test
-    public void browseNonExistentIssue(){
+    public void browseNonExistentIssue() {
         driver.get("https://jira-auto.codecool.metastage.net/browse/COALA-5");
         Assertions.assertEquals("You can't view this issue", issue.issueNotAvailable());
-    }
-
-    @Test
-    public void browseCoalaIssue1(){
-        browseIssue("COALA-1");
-    }
-
-    @Test
-    public void browseCoalaIssue2(){
-        browseIssue("COALA-2");
-    }
-
-    @Test
-    public void browseCoalaIssue3(){
-        browseIssue("COALA-3");
-    }
-
-    @Test
-    public void browseJetiIssue1(){
-        browseIssue("JETI-1");
-    }
-
-    @Test
-    public void browseJetiIssue2(){
-        browseIssue("JETI-2");
-    }
-
-    @Test
-    public void browseJetiIssue3(){
-        browseIssue("JETI-3");
-    }
-
-    @Test
-    public void browseToucanIssue1(){
-        browseIssue("TOUCAN-1");
-    }
-
-    @Test
-    public void browseToucanIssue2(){
-        browseIssue("TOUCAN-2");
-    }
-
-    @Test
-    public void browseToucanIssue3(){
-        browseIssue("TOUCAN-3");
-    }
-
-    @AfterEach
-    public void closeDriver(){
-        driver.close();
     }
 }
