@@ -29,7 +29,7 @@ public abstract class TestBase {
         password = browserProps.getProperty("password");
     }
 
-    public void launchBrowser(){
+    public static void launchBrowser(){
         String webdriverPath = browserProps.getProperty("webdriver");
         System.setProperty("webdriver.gecko.driver", webdriverPath);
         FirefoxOptions firefoxOptions = new FirefoxOptions();
