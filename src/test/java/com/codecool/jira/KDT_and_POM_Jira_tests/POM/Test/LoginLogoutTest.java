@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import java.util.concurrent.TimeUnit;
 
 public class LoginLogoutTest extends TestBase {
-    JiraLogin login;
     NavBar navBar;
     ProfilePage profilePage;
     LogoutPage logoutPage;
