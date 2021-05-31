@@ -1,24 +1,31 @@
 package com.codecool.jira.KDT_and_POM_Jira_tests.POM.Test;
 
+import com.codecool.jira.KDT_and_POM_Jira_tests.POM.CSVDataReaders;
 import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.BrowseIssuePage;
 import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.CreateIssueScreen;
 import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.NavBar;
+import com.opencsv.exceptions.CsvValidationException;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.io.IOException;
 
 public class CreateIssueTest extends TestBase {
     CreateIssueScreen screen;
     NavBar navBar;
     BrowseIssuePage issue;
 
-    private void createIssueInProject(String project, String issueType){
-        screen = openCreateIssueScreen(project, issueType, "New issue");
-        Assertions.assertEquals(project, screen.getProject());
-        Assertions.assertEquals(issueType, screen.getIssueType());
+    public static String[][] dp() throws IOException, CsvValidationException {
+        String csvDataFilePath = "src/test/java/com/codecool/jira/KDT_and_POM_Jira_tests/resources/ProjectAndIssueType.csv";
+        String[][] dataFromCSV = CSVDataReaders.getCSVData(csvDataFilePath, ',');
+        return dataFromCSV;
     }
 
-    private void createSubtaskInIssue(String key){
-        issue = new BrowseIssuePage(driver);
-        Assertions.assertEquals("Create Subtask : " + key, issue.createSubtaskInIssue(key));
+    public static String[][] subtask() throws IOException, CsvValidationException {
+        String csvDataFilePath = "src/test/java/com/codecool/jira/KDT_and_POM_Jira_tests/resources/SubtaskIssueKeys.csv";
+        String[][] dataFromCSV = CSVDataReaders.getCSVData(csvDataFilePath, ',');
+        return dataFromCSV;
     }
 
     private CreateIssueScreen openCreateIssueScreen(String project, String issueType, String summary){
@@ -72,63 +79,23 @@ public class CreateIssueTest extends TestBase {
         Assertions.assertEquals("No issues were found to match your search", issue.getErrorMessage());
     }
 
-    @Test
-    public void createStoryInCOALA(){
-        createIssueInProject("COALA project (COALA)", "Story");
+    @MethodSource("dp")
+    @ParameterizedTest
+    public void createIssueInProject(String project, String issueType){
+        screen = openCreateIssueScreen(project, issueType, "New issue");
+        Assertions.assertEquals(project, screen.getProject());
+        Assertions.assertEquals(issueType, screen.getIssueType());
     }
 
-    @Test
-    public void createBugInCOALA(){
-        createIssueInProject("COALA project (COALA)", "Bug");
+    @MethodSource("subtask")
+    @ParameterizedTest
+    public void createSubtaskInIssue(String key){
+        issue = new BrowseIssuePage(driver);
+        Assertions.assertEquals("Create Subtask : " + key, issue.createSubtaskInIssue(key));
     }
-
-    @Test
-    public void createTaskInCOALA(){
-        createIssueInProject("COALA project (COALA)", "Task");
-    }
-
-    @Test
-    public void createStoryInJETI(){
-        createIssueInProject("JETI project (JETI)", "Story");
-    }
-
-    @Test
-    public void createBugInJETI(){
-        createIssueInProject("JETI project (JETI)", "Bug");
-    }
-
-    @Test
-    public void createTaskInJETI(){
-        createIssueInProject("JETI project (JETI)", "Task");
-    }
-
-    @Test
-    public void createStoryInTOUCAN() {
-        createIssueInProject("TOUCAN project (TOUCAN)", "Story");
-    }
-
-    @Test
-    public void createBugInTOUCAN() {
-        createIssueInProject("TOUCAN project (TOUCAN)", "Bug");
-    }
-
-    @Test
-    public void createTaskInTOUCAN() {
-        createIssueInProject("TOUCAN project (TOUCAN)", "Task");
-    }
-
-    @Test
-    public void createSubtaskInTOUCAN(){ createSubtaskInIssue("TOUCAN-1"); }
-
-    @Test
-    public void createSubtaskInJETI(){ createSubtaskInIssue("JETI-1"); }
-
-    @Test
-    public void createSubtaskInCOALA(){ createSubtaskInIssue("COALA-13"); }
 
     @AfterEach
     public void closeDriver(){
         driver.close();
     }
-
 }
