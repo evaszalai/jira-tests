@@ -1,10 +1,10 @@
 package com.codecool.jira.KDT_and_POM_Jira_tests.POM.Test;
 
-import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.*;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.JiraLoginPage;
+import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.LogoutPage;
+import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.NavBar;
+import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.ProfilePage;
+import org.junit.jupiter.api.*;
 
 public class LoginPageTest extends TestBase {
     JiraLoginPage login;
@@ -52,5 +52,11 @@ public class LoginPageTest extends TestBase {
         logoutPage = new LogoutPage(driver);
         Assertions.assertEquals("You are now logged out. Any automatic login has also been stopped.",
                 logoutPage.getMessage());
+    }
+
+    @AfterEach
+    public void quit(){
+        driver.close();
+        driver.quit();
     }
 }
