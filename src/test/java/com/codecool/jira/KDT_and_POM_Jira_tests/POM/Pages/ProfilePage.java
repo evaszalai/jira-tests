@@ -7,14 +7,14 @@ import org.openqa.selenium.support.FindBy;
 public class ProfilePage {
     WebDriver driver;
 
-    @FindBy(id = "up-d-username")
-    WebElement userName;
+    @FindBy(id="up-d-username")
+    WebElement profilePageUsername;
 
     public ProfilePage(WebDriver driver) {
         this.driver = driver;
     }
 
     public String getUserName() {
-        return userName.getText();
+        return profilePageUsername.getText();
     }
 }

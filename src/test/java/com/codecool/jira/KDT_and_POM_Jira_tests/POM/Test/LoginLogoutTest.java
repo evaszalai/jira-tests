@@ -10,6 +10,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.TimeUnit;
+
 public class LoginLogoutTest extends TestBase {
     JiraLogin login;
     NavBar navBar;
@@ -19,6 +21,7 @@ public class LoginLogoutTest extends TestBase {
     @BeforeAll
     public static void start(){
         setup();
+        launchBrowser();
     }
 
     @BeforeEach
