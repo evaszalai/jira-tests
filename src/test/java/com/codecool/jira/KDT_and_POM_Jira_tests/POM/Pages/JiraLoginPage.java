@@ -3,6 +3,9 @@ package com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import java.util.concurrent.TimeUnit;
 
 public class JiraLoginPage {
     WebDriver driver;
@@ -21,6 +24,8 @@ public class JiraLoginPage {
 
     public JiraLoginPage(WebDriver driver) {
         this.driver = driver;
+        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+        PageFactory.initElements(driver, this);
     }
 
     public void setUserName(String userName){
