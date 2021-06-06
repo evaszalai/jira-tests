@@ -3,6 +3,7 @@ package com.codecool.jira.KDT_and_POM_Jira_tests.POM.Test;
 import com.codecool.jira.KDT_and_POM_Jira_tests.KDT.operation.UIOperation;
 import com.codecool.jira.KDT_and_POM_Jira_tests.POM.Pages.JiraLogin;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
@@ -29,12 +30,19 @@ public abstract class TestBase {
         password = browserProps.getProperty("password");
     }
 
-    public static void launchBrowser(){
-        String webdriverPath = browserProps.getProperty("webdriver");
-        System.setProperty("webdriver.gecko.driver", webdriverPath);
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.setCapability("marionette", true);
-        driver = new FirefoxDriver(firefoxOptions);
+    public void launchBrowser(){
+        if (browserProps.getProperty("browser").equals("Firefox")){
+            String webdriverPath = browserProps.getProperty("firefoxDriver");
+            System.setProperty("webdriver.gecko.driver", webdriverPath);
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            firefoxOptions.setCapability("marionette", true);
+            driver = new FirefoxDriver(firefoxOptions);
+        } else if (browserProps.getProperty("browser").equals("Chrome")){
+            String webdriverPath = browserProps.getProperty("chromedriver");
+            System.setProperty("webdriver.chrome.driver", webdriverPath);
+            driver = new ChromeDriver();
+        }
+
     }
 
     public void login(){

@@ -12,7 +12,7 @@ import java.io.IOException;
 public class BrowseIssueTest extends TestBase {
     BrowseIssuePage issue;
 
-    public static String[][] dp() throws IOException, CsvValidationException {
+    public static String[][] dp() throws CsvValidationException {
         String csvDataFilePath = "src/test/java/com/codecool/jira/KDT_and_POM_Jira_tests/resources/IssueKeys.csv";
         String[][] dataFromCSV = CSVDataReaders.getCSVData(csvDataFilePath, ',');
         return dataFromCSV;
@@ -40,5 +40,10 @@ public class BrowseIssueTest extends TestBase {
     public void browseNonExistentIssue() {
         driver.get("https://jira-auto.codecool.metastage.net/browse/COALA-5");
         Assertions.assertEquals("You can't view this issue", issue.issueNotAvailable());
+    }
+
+    @AfterEach
+    public void closeBrowser(){
+        driver.close();
     }
 }
