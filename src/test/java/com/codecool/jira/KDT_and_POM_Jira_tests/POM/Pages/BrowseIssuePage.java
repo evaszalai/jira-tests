@@ -58,10 +58,6 @@ public class BrowseIssuePage {
         return summary.getText();
     }
 
-    public String checkEditButton(){
-        return editButton.getText();
-    }
-
     public void clickEditButton(){
         editButton.click();
     }
@@ -94,4 +90,8 @@ public class BrowseIssuePage {
         return subtaskScreenHeader.getText();
     }
 
+    public String checkEditButton(String project, String issue){
+        driver.get("https://jira-auto.codecool.metastage.net/projects/" + project + "/issues/" + issue);
+        return editButton.getText();
+    }
 }
